@@ -38,46 +38,64 @@
       </div>
     </ng-template>
 
-    <p-table
-      [value]="chamados()"
-      [rowTrackBy]="trackById"
-      responsiveLayout="stack"
-      breakpoint="768px"
-      styleClass="p-datatable-sm chamados-table"
-      [tableStyle]="{ 'min-width': '56rem' }"
-      [stripedRows]="true"
-      [showGridlines]="true"
-    >
-      <ng-template pTemplate="header">
-        <tr>
-          <th>ID</th>
-          <th>Título</th>
-          <th>Descrição</th>
-          <th>Categoria</th>
-        </tr>
-      </ng-template>
+    <div class="desktop-table-wrapper">
+      <p-table
+        [value]="chamados()"
+        [rowTrackBy]="trackById"
+        styleClass="p-datatable-sm chamados-table"
+        [tableStyle]="{ width: '100%' }"
+        [stripedRows]="true"
+        [showGridlines]="true"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Descrição</th>
+            <th>Categoria</th>
+          </tr>
+        </ng-template>
 
-      <ng-template pTemplate="body" let-chamado>
-        <tr>
-          <td>
-            <span class="p-column-title"></span>
+        <ng-template pTemplate="body" let-chamado>
+          <tr>
+            <td>
+              <strong>#{{ chamado.id }}</strong>
+            </td>
+            <td>{{ chamado.titulo }}</td>
+            <td>{{ chamado.descricao }}</td>
+            <td>
+              <p-tag [value]="chamado.categoria" [severity]="obterSeverity(chamado.categoria)" />
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <div class="mobile-chamados-list" aria-label="Lista de chamados em formato móvel">
+      @for (chamado of chamados(); track chamado.id) {
+        <article class="mobile-chamado-card">
+          <div class="mobile-row">
+            <span class="mobile-label">ID</span>
             <strong>#{{ chamado.id }}</strong>
-          </td>
-          <td>
-            <span class="p-column-title"></span>
+          </div>
+
+          <div class="mobile-row">
+            <span class="mobile-label">Título</span>
             <span>{{ chamado.titulo }}</span>
-          </td>
-          <td>
-            <span class="p-column-title"></span>
+          </div>
+
+          <div class="mobile-row">
+            <span class="mobile-label">Descrição</span>
             <span>{{ chamado.descricao }}</span>
-          </td>
-          <td>
-            <span class="p-column-title"></span>
+          </div>
+
+          <div class="mobile-row">
+            <span class="mobile-label">Categoria</span>
             <p-tag [value]="chamado.categoria" [severity]="obterSeverity(chamado.categoria)" />
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
+          </div>
+        </article>
+      }
+    </div>
   </p-card>
 } @else {
   <p-card styleClass="content-card">

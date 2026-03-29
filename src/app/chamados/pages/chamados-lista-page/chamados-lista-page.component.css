@@ -77,13 +77,13 @@
 .empty-state h3 {
   margin: 0;
   font-size: 1.35rem;
-  color: var(--color-surface-100);
+  color: var(--color-surface-900);
 }
 
 .card-header p,
 .empty-state p {
   margin: 0.4rem 0 0;
-  color: var(--color-surface-100);
+  color: var(--color-surface-600);
 }
 
 .empty-state {
@@ -102,6 +102,14 @@
   background: linear-gradient(135deg, rgba(15, 76, 129, 0.14), rgba(42, 157, 143, 0.2));
   color: var(--color-primary);
   font-size: 1.5rem;
+}
+
+.desktop-table-wrapper {
+  display: block;
+}
+
+.mobile-chamados-list {
+  display: none;
 }
 
 :host ::ng-deep .content-card {
@@ -124,9 +132,11 @@
 :host ::ng-deep .chamados-table .p-datatable-tbody > tr > td {
   vertical-align: top;
   line-height: 1.6;
+  word-break: break-word;
 }
 
-:host ::ng-deep .chamados-table .p-tag {
+:host ::ng-deep .chamados-table .p-tag,
+.mobile-chamados-list .p-tag {
   border-radius: 999px;
 }
 
@@ -142,19 +152,42 @@
 }
 
 @media (max-width: 768px) {
-  :host ::ng-deep .chamados-table .p-datatable-tbody > tr > td {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    text-align: right;
+  .desktop-table-wrapper {
+    display: none;
   }
 
-  :host ::ng-deep .chamados-table .p-column-title {
-    display: inline-flex;
-    min-width: 7rem;
+  .mobile-chamados-list {
+    display: grid;
+    gap: 1rem;
+    padding-top: 0.75rem;
+  }
+
+  .mobile-chamado-card {
+    display: grid;
+    gap: 0.95rem;
+    padding: 1rem;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 20px;
+    background: rgba(247, 250, 252, 0.92);
+  }
+
+  .mobile-row {
+    display: grid;
+    grid-template-columns: minmax(5.5rem, 6.5rem) minmax(0, 1fr);
+    align-items: start;
+    gap: 0.75rem;
+  }
+
+  .mobile-label {
     font-weight: 700;
     color: var(--color-surface-700);
-    text-align: left;
+    white-space: nowrap;
+  }
+
+  .mobile-row > :last-child {
+    min-width: 0;
+    color: var(--color-surface-900);
+    word-break: break-word;
   }
 }
 
