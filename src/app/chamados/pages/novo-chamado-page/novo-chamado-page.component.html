@@ -1,0 +1,96 @@
+<section class="form-hero">
+  <div>
+    <p class="section-kicker">Novo registro</p>
+    <h2>Abra um chamado com as informações essenciais</h2>
+    <p class="section-copy">
+      Preencha os dados principais para que a equipe de suporte tenha contexto suficiente e consiga
+      priorizar o atendimento rapidamente.
+    </p>
+  </div>
+
+  <div class="hero-note">
+    <i class="pi pi-check-circle" aria-hidden="true"></i>
+    <span>Validações básicas ativas para evitar cadastros incompletos.</span>
+  </div>
+</section>
+
+<p-card styleClass="form-card">
+  <form class="chamado-form" [formGroup]="chamadoForm" (ngSubmit)="salvarChamado()">
+    <div class="field-group">
+      <label for="titulo">Título do chamado</label>
+      <input
+        id="titulo"
+        type="text"
+        pInputText
+        formControlName="titulo"
+        placeholder="Ex.: Impressora do setor jurídico sem toner"
+        [class.ng-invalid]="campoInvalido('titulo')"
+        [class.ng-dirty]="campoInvalido('titulo')"
+      />
+      @if (campoInvalido('titulo')) {
+        <small class="field-error">Informe um título válido para o chamado.</small>
+      }
+    </div>
+
+    <div class="field-group">
+      <label for="descricao">Descrição</label>
+      <textarea
+        id="descricao"
+        pTextarea
+        formControlName="descricao"
+        rows="6"
+        placeholder="Descreva o problema, o impacto para a área e qualquer detalhe útil para o atendimento."
+        [class.ng-invalid]="campoInvalido('descricao')"
+        [class.ng-dirty]="campoInvalido('descricao')"
+      ></textarea>
+      @if (campoInvalido('descricao')) {
+        <small class="field-error">A descrição é obrigatória para contextualizar a solicitação.</small>
+      }
+    </div>
+
+    <div class="field-group">
+      <label for="categoria">Categoria</label>
+      <p-select
+        inputId="categoria"
+        formControlName="categoria"
+        [options]="categorias"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Selecione uma categoria"
+        [showClear]="true"
+        [fluid]="true"
+        [class.ng-invalid]="campoInvalido('categoria')"
+        [class.ng-dirty]="campoInvalido('categoria')"
+      >
+        <ng-template pTemplate="item" let-categoria>
+          <div class="category-option">
+            <span>{{ categoria.label }}</span>
+            <small>{{ categoria.descricao }}</small>
+          </div>
+        </ng-template>
+      </p-select>
+      @if (campoInvalido('categoria')) {
+        <small class="field-error">Selecione a categoria que melhor representa o chamado.</small>
+      }
+    </div>
+
+    <div class="form-actions">
+      <a
+        pButton
+        label="Cancelar"
+        icon="pi pi-arrow-left"
+        severity="secondary"
+        [outlined]="true"
+        routerLink="/chamados"
+      ></a>
+
+      <button
+        pButton
+        type="submit"
+        label="Salvar chamado"
+        icon="pi pi-check"
+        [disabled]="chamadoForm.invalid"
+      ></button>
+    </div>
+  </form>
+</p-card>

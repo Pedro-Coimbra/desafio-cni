@@ -1,1 +1,74 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'primeicons/primeicons.css';
+
+:root {
+  color-scheme: light;
+  --font-family-base: 'Aptos', 'Trebuchet MS', 'Segoe UI', sans-serif;
+  --color-primary: #0f4c81;
+  --color-accent: #2a9d8f;
+  --color-highlight: #f4a261;
+  --color-success: #1f8a70;
+  --color-danger: #c44536;
+  --color-surface-900: #10223a;
+  --color-surface-800: #1f334f;
+  --color-surface-700: #35506f;
+  --color-surface-600: #57718e;
+  --color-surface-500: #6f86a2;
+  --color-surface-100: #eef4f8;
+  --color-surface-50: #f7fafc;
+  --shadow-soft: 0 20px 60px rgba(15, 23, 42, 0.1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: var(--font-family-base);
+  color: var(--color-surface-900);
+  background:
+    radial-gradient(circle at top left, rgba(42, 157, 143, 0.12), transparent 30%),
+    radial-gradient(circle at right center, rgba(244, 162, 97, 0.14), transparent 30%),
+    linear-gradient(180deg, #f9fbfd 0%, #edf3f8 100%);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid rgba(15, 76, 129, 0.35);
+  outline-offset: 3px;
+}
+
+@keyframes fade-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+app-root {
+  animation: fade-slide-up 420ms ease-out;
+}
