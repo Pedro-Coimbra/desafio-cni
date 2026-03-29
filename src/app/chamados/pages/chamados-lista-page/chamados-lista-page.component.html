@@ -1,0 +1,102 @@
+<section class="hero-panel">
+  <div>
+    <p class="section-kicker">Operação de suporte</p>
+    <h2>Chamados corporativos em um só lugar</h2>
+    <p class="section-copy">
+      Visualize rapidamente as solicitações abertas, acompanhe prioridades por categoria e mantenha a
+      operação interna mais organizada.
+    </p>
+  </div>
+
+  <div class="hero-metrics" aria-label="Resumo de chamados">
+    <article>
+      <strong>{{ chamados().length }}</strong>
+      <span>chamados ativos</span>
+    </article>
+    <article>
+      <strong>4</strong>
+      <span>categorias monitoradas</span>
+    </article>
+  </div>
+</section>
+
+@if (chamados().length > 0) {
+  <p-card styleClass="content-card">
+    <ng-template pTemplate="header">
+      <div class="card-header">
+        <div>
+          <h3>Fila de atendimento</h3>
+          <p>Os chamados recém-criados aparecem no topo para facilitar o acompanhamento.</p>
+        </div>
+
+        <a
+          pButton
+          label="Cadastrar chamado"
+          icon="pi pi-plus"
+          routerLink="/chamados/novo"
+        ></a>
+      </div>
+    </ng-template>
+
+    <p-table
+      [value]="chamados()"
+      [rowTrackBy]="trackById"
+      responsiveLayout="stack"
+      breakpoint="768px"
+      styleClass="p-datatable-sm chamados-table"
+      [tableStyle]="{ 'min-width': '56rem' }"
+      [stripedRows]="true"
+      [showGridlines]="true"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>ID</th>
+          <th>Título</th>
+          <th>Descrição</th>
+          <th>Categoria</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-chamado>
+        <tr>
+          <td>
+            <span class="p-column-title"></span>
+            <strong>#{{ chamado.id }}</strong>
+          </td>
+          <td>
+            <span class="p-column-title"></span>
+            <span>{{ chamado.titulo }}</span>
+          </td>
+          <td>
+            <span class="p-column-title"></span>
+            <span>{{ chamado.descricao }}</span>
+          </td>
+          <td>
+            <span class="p-column-title"></span>
+            <p-tag [value]="chamado.categoria" [severity]="obterSeverity(chamado.categoria)" />
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+} @else {
+  <p-card styleClass="content-card">
+    <div class="empty-state">
+      <div class="empty-icon" aria-hidden="true">
+        <i class="pi pi-inbox"></i>
+      </div>
+
+      <div>
+        <h3>Nenhum chamado cadastrado</h3>
+        <p>Crie o primeiro registro para começar a organizar as demandas da equipe.</p>
+      </div>
+
+      <a
+        pButton
+        label="Criar primeiro chamado"
+        icon="pi pi-plus"
+        routerLink="/chamados/novo"
+      ></a>
+    </div>
+  </p-card>
+}
