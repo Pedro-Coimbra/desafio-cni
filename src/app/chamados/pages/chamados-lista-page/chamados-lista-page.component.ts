@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
@@ -16,10 +17,11 @@ import { ChamadosService } from '../../services/chamados.service';
 })
 export class ChamadosListaPageComponent {
   private readonly chamadosService = inject(ChamadosService);
+  private readonly messageService = inject(MessageService);
 
-  protected readonly chamados = this.chamadosService.chamados;
+  readonly chamados = this.chamadosService.chamados;
 
-  protected obterSeverity(categoria: CategoriaChamado): 'danger' | 'info' | 'success' | 'contrast' {
+  obterSeverity(categoria: CategoriaChamado): 'danger' | 'info' | 'success' | 'contrast' {
     const severityMap: Record<CategoriaChamado, 'danger' | 'info' | 'success' | 'contrast'> = {
       Hardware: 'danger',
       Software: 'info',
@@ -30,7 +32,34 @@ export class ChamadosListaPageComponent {
     return severityMap[categoria];
   }
 
-  protected trackById(_index: number, chamado: Chamado): number {
+  trackById(_index: number, chamado: Chamado): number {
     return chamado.id;
+  }
+
+  excluirChamado(chamado: Chamado): void {
+    const confirmouExclusao = window.confirm(
+      `Deseja excluir o chamado "${chamado.titulo}"? Esta ação não poderá ser desfeita.`
+    );
+
+    if (!confirmouExclusao) {
+      return;
+    }
+
+    const removido = this.chamadosService.excluirChamado(chamado.id);
+
+    if (removido) {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Chamado excluído',
+        detail: 'O chamado foi removido da fila com sucesso.'
+      });
+      return;
+    }
+
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Não foi possível excluir',
+      detail: 'O chamado não foi encontrado para remoção.'
+    });
   }
 }

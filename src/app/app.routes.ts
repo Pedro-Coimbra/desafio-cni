@@ -21,6 +21,13 @@ export const routes: Routes = [
       )
   },
   {
+    path: 'chamados/:id/editar',
+    loadComponent: () =>
+      import('./chamados/pages/novo-chamado-page/novo-chamado-page.component').then(
+        (module) => module.NovoChamadoPageComponent
+      )
+  },
+  {
     path: '**',
     redirectTo: 'chamados'
   }
