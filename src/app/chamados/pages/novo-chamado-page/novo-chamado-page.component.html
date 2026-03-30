@@ -1,16 +1,15 @@
 <section class="form-hero">
   <div>
-    <p class="section-kicker">Novo registro</p>
-    <h2>Abra um chamado com as informações essenciais</h2>
+    <p class="section-kicker">{{ obterSectionKicker() }}</p>
+    <h2>{{ obterTituloPagina() }}</h2>
     <p class="section-copy">
-      Preencha os dados principais para que a equipe de suporte tenha contexto suficiente e consiga
-      priorizar o atendimento rapidamente.
+      {{ obterTextoAuxiliar() }}
     </p>
   </div>
 
   <div class="hero-note">
     <i class="pi pi-check-circle" aria-hidden="true"></i>
-    <span>Validações básicas ativas para evitar cadastros incompletos.</span>
+    <span>{{ obterTextoNota() }}</span>
   </div>
 </section>
 
@@ -87,7 +86,7 @@
       <button
         pButton
         type="submit"
-        label="Salvar chamado"
+        [label]="obterLabelSubmit()"
         icon="pi pi-check"
         [disabled]="chamadoForm.invalid"
       ></button>

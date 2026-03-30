@@ -53,6 +53,7 @@
             <th>Título</th>
             <th>Descrição</th>
             <th>Categoria</th>
+            <th class="actions-column">Ações</th>
           </tr>
         </ng-template>
 
@@ -65,6 +66,30 @@
             <td>{{ chamado.descricao }}</td>
             <td>
               <p-tag [value]="chamado.categoria" [severity]="obterSeverity(chamado.categoria)" />
+            </td>
+            <td class="actions-cell">
+              <div class="table-actions">
+                <a
+                  pButton
+                  icon="pi pi-pencil"
+                  severity="secondary"
+                  [text]="true"
+                  [rounded]="true"
+                  [routerLink]="['/chamados', chamado.id, 'editar']"
+                  [attr.aria-label]="'Editar chamado ' + chamado.id"
+                ></a>
+
+                <button
+                  pButton
+                  type="button"
+                  icon="pi pi-trash"
+                  severity="danger"
+                  [text]="true"
+                  [rounded]="true"
+                  [attr.aria-label]="'Excluir chamado ' + chamado.id"
+                  (click)="excluirChamado(chamado)"
+                ></button>
+              </div>
             </td>
           </tr>
         </ng-template>
@@ -92,6 +117,27 @@
           <div class="mobile-row">
             <span class="mobile-label">Categoria</span>
             <p-tag [value]="chamado.categoria" [severity]="obterSeverity(chamado.categoria)" />
+          </div>
+
+          <div class="mobile-actions">
+            <a
+              pButton
+              label="Editar"
+              icon="pi pi-pencil"
+              severity="secondary"
+              [outlined]="true"
+              [routerLink]="['/chamados', chamado.id, 'editar']"
+            ></a>
+
+            <button
+              pButton
+              type="button"
+              label="Excluir"
+              icon="pi pi-trash"
+              severity="danger"
+              [outlined]="true"
+              (click)="excluirChamado(chamado)"
+            ></button>
           </div>
         </article>
       }

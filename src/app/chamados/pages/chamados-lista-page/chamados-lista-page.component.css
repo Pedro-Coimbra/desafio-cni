@@ -77,13 +77,13 @@
 .empty-state h3 {
   margin: 0;
   font-size: 1.35rem;
-  color: var(--color-surface-900);
+  color: var(--color-surface-100);
 }
 
 .card-header p,
 .empty-state p {
   margin: 0.4rem 0 0;
-  color: var(--color-surface-600);
+  color: var(--color-surface-100);
 }
 
 .empty-state {
@@ -129,6 +129,10 @@
   font-size: 0.88rem;
 }
 
+:host ::ng-deep .chamados-table .actions-column {
+  width: 7.5rem;
+}
+
 :host ::ng-deep .chamados-table .p-datatable-tbody > tr > td {
   vertical-align: top;
   line-height: 1.6;
@@ -138,6 +142,16 @@
 :host ::ng-deep .chamados-table .p-tag,
 .mobile-chamados-list .p-tag {
   border-radius: 999px;
+}
+
+.actions-cell {
+  text-align: center;
+}
+
+.table-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 @media (max-width: 900px) {
@@ -188,6 +202,13 @@
     min-width: 0;
     color: var(--color-surface-900);
     word-break: break-word;
+  }
+
+  .mobile-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    padding-top: 0.25rem;
   }
 }
 
