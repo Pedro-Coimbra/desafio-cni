@@ -1,59 +1,107 @@
-# DesafioCni
+# Central de Chamados
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.23.
+Aplicação Angular 19 criada para o desafio técnico de Analista Front-End. O projeto simula o gerenciamento de chamados corporativos com listagem, cadastro, validação de formulário, feedback visual ao usuário e layout responsivo para desktop e mobile.
 
-## Development server
+## Tecnologias utilizadas
 
-To start a local development server, run:
+- Angular 19 com componentes standalone e roteamento.
+- PrimeNG 19, PrimeIcons e tema Aura para tabela, formulário, botões, tags e toasts.
+- TypeScript e Reactive Forms para modelagem tipada e validações.
+- Signals para estado local em memória no serviço de chamados.
+- Mock local em TypeScript para simular a origem de dados sem depender de backend.
 
-```bash
-ng serve
+## Justificativas das escolhas
+
+- Angular 19: entrega uma base moderna, organizada e adequada para componentização, testes e roteamento.
+- PrimeNG: atende diretamente ao requisito do desafio e acelera a construção de uma interface consistente e acessível.
+- Serviço com mock local: permite demonstrar arquitetura de front-end, fluxo de criação e atualização de estado sem adicionar complexidade desnecessária de API.
+- Signals: simplificam o gerenciamento do estado local e deixam a atualização da listagem imediata após o cadastro.
+
+## Funcionalidades entregues
+
+- Listagem de chamados com ID, título, descrição e categoria.
+- Cadastro de novo chamado com título, descrição e categoria.
+- Edição de chamados existentes diretamente pela listagem.
+- Exclusão de chamados com confirmação antes da remoção.
+- Validações para impedir envio de campos obrigatórios vazios.
+- Feedback com toast para sucesso no cadastro e aviso de validação.
+- Estado vazio com chamada para ação.
+- Navegação entre listagem e criação por roteamento.
+- Responsividade para diferentes larguras de tela.
+
+## Estrutura resumida
+
+```text
+src/app
+├─ chamados
+│  ├─ data
+│  ├─ models
+│  ├─ pages
+│  ├─ services
+│  └─ validators
+├─ app.component.*
+├─ app.config.ts
+└─ app.routes.ts
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Como executar
 
-## Code scaffolding
+### Pré-requisitos
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Node.js 20+
+- npm 10+
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Instalação
 
 ```bash
-ng generate --help
+npm install
 ```
 
-## Building
-
-To build the project run:
+### Ambiente de desenvolvimento
 
 ```bash
-ng build
+npm start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Abra `http://localhost:4200/`.
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### Build de produção
 
 ```bash
-ng test
+npm run build
 ```
 
-## Running end-to-end tests
+### Testes
 
-For end-to-end (e2e) testing, run:
+Modo padrão do Angular:
 
 ```bash
-ng e2e
+npm test
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Modo headless, útil para validação rápida:
 
-## Additional Resources
+```bash
+npm run test:ci
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Decisões de implementação
+
+- Os dados são mantidos em memória durante a execução da aplicação.
+- Novos chamados recebem ID sequencial com base no maior ID existente.
+- O chamado recém-criado aparece no topo da listagem para facilitar conferência.
+
+## Uso de IA e ferramentas de apoio
+
+- Ferramentas utilizadas: `Codex / ChatGPT` e `Copilot` como apoio de implementação e revisão.
+- Tipo de uso: apoio para escrita de código, testes e documentação.
+
+## Percentual estimado de autoria
+
+- Código escrito: `70%`
+- Código gerado com apoio de IA: `30%`
+
+## Observações finais
+
+- O projeto não possui persistência após recarregar a página.
+- A solução prioriza clareza, componentização e aderência ao escopo pedido no enunciado.
